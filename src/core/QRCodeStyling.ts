@@ -119,11 +119,13 @@ export default class QRCodeStyling {
 
     if (extension.toLowerCase() === "svg") {
       const serializer = new XMLSerializer();
+      // eslint-disable-next-line prettier/prettier
       const source = serializer.serializeToString(((element as unknown) as QRSVG).getElement());
 
       return new Blob(['<?xml version="1.0" standalone="no"?>\r\n' + source], { type: "image/svg+xml" });
     } else {
       return new Promise((resolve) =>
+        // eslint-disable-next-line prettier/prettier
         ((element as unknown) as QRCanvas).getCanvas().toBlob(resolve, `image/${extension}`, 1)
       );
     }
@@ -153,12 +155,14 @@ export default class QRCodeStyling {
 
     if (extension.toLowerCase() === "svg") {
       const serializer = new XMLSerializer();
+      // eslint-disable-next-line prettier/prettier
       let source = serializer.serializeToString(((element as unknown) as QRSVG).getElement());
 
       source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
       const url = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(source);
       downloadURI(url, `${name}.svg`);
     } else {
+      // eslint-disable-next-line prettier/prettier
       const url = ((element as unknown) as QRCanvas).getCanvas().toDataURL(`image/${extension}`);
       downloadURI(url, `${name}.${extension}`);
     }
